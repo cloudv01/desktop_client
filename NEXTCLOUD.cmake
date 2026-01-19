@@ -13,7 +13,7 @@ else()
     set( APPLICATION_NAME       "Droptocloud" )
     set( APPLICATION_SHORTNAME  "Droptocloud" )
     set( APPLICATION_EXECUTABLE "Droptocloud" )
-    set( APPLICATION_ICON_NAME  "${APPLICATION_SHORTNAME}" )
+    set( APPLICATION_ICON_NAME  "Nextcloud" )
 endif()
 
 set( APPLICATION_CONFIG_NAME "${APPLICATION_EXECUTABLE}" )
