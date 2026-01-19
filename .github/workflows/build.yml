@@ -3,7 +3,7 @@ name: Build Branded Windows Client
 on:
   push:
     branches: [ master, main ]
-  workflow_dispatch: # Allows you to run it manually
+  workflow_dispatch:
 
 jobs:
   build:
@@ -24,6 +24,13 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install Inkscape (Required for Icons)
+        shell: pwsh
+        run: |
+          choco install inkscape --no-progress -y
+          # Add Inkscape to PATH immediately for the current session
+          echo "C:\Program Files\Inkscape\bin" >> $env:GITHUB_PATH
+
       - name: Install Build Tools (Craft)
         shell: pwsh
         run: |
@@ -34,7 +41,6 @@ jobs:
               if($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}
           }
           
-          # Initialize environment
           craft --add-blueprint-repository "https://github.com/nextcloud/craft-blueprints-kde.git|stable-4.0|"
           craft --add-blueprint-repository "https://github.com/nextcloud/desktop-client-blueprints.git|stable-4.0|"
           craft craft
