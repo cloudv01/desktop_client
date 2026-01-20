@@ -1,3 +1,72 @@
+# # # # name: Build Branded Windows Client
+
+# # # # on:
+# # # #   push:
+# # # #     branches: [ master, main ]
+# # # #   workflow_dispatch:
+
+# # # # jobs:
+# # # #   build:
+# # # #     runs-on: windows-2022
+# # # #     env:
+# # # #       CRAFT_TARGET: windows-msvc2022_64-cl
+# # # #       CRAFT_MASTER_LOCATION: ${{ github.workspace }}\CraftMaster
+# # # #       CRAFT_MASTER_CONFIG: ${{ github.workspace }}\craftmaster.ini
+
+# # # #     steps:
+# # # #       - name: Checkout Code
+# # # #         uses: actions/checkout@v4
+# # # #         with:
+# # # #           fetch-depth: 0
+
+# # # #       - name: Setup Python
+# # # #         uses: actions/setup-python@v5
+# # # #         with:
+# # # #           python-version: '3.12'
+
+# # # #       - name: Install Inkscape (Required for Icons)
+# # # #         shell: pwsh
+# # # #         run: |
+# # # #           choco install inkscape --no-progress -y
+# # # #           # Add Inkscape to PATH immediately for the current session
+# # # #           echo "C:\Program Files\Inkscape\bin" >> $env:GITHUB_PATH
+
+# # # #       - name: Install Build Tools (Craft)
+# # # #         shell: pwsh
+# # # #         run: |
+# # # #           git clone -q --depth=1 https://invent.kde.org/packaging/craftmaster.git ${{ env.CRAFT_MASTER_LOCATION }}
+          
+# # # #           function craft() {
+# # # #               python "${{ env.CRAFT_MASTER_LOCATION }}\CraftMaster.py" --config "${{ env.CRAFT_MASTER_CONFIG }}" --target ${{ env.CRAFT_TARGET }} -c $args
+# # # #               if($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}
+# # # #           }
+          
+# # # #           craft --add-blueprint-repository "https://github.com/nextcloud/craft-blueprints-kde.git|stable-4.0|"
+# # # #           craft --add-blueprint-repository "https://github.com/nextcloud/desktop-client-blueprints.git|stable-4.0|"
+# # # #           craft craft
+# # # #           craft --install-deps nextcloud-client
+
+# # # #       - name: Compile and Package
+# # # #         shell: pwsh
+# # # #         run: |
+# # # #           function craft() {
+# # # #               python "${{ env.CRAFT_MASTER_LOCATION }}\CraftMaster.py" --config "${{ env.CRAFT_MASTER_CONFIG }}" --target ${{ env.CRAFT_TARGET }} -c $args
+# # # #               if($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}
+# # # #           }
+          
+# # # #           # Build using your source code
+# # # #           craft --src-dir ${{ github.workspace }} nextcloud-client
+# # # #           # Create the .exe installer
+# # # #           craft --package nextcloud-client
+
+# # # #       - name: Upload Branded Installer
+# # # #         uses: actions/upload-artifact@v4
+# # # #         with:
+# # # #           name: Branded-Nextcloud-Installer
+# # # #           path: |
+# # # #             ${{ github.workspace }}\${{ env.CRAFT_TARGET }}\tmp\artifacts\*.exe
+# # # #             ${{ github.workspace }}\${{ env.CRAFT_TARGET }}\tmp\artifacts\*.msi
+
 # # # name: Build Branded Windows Client
 
 # # # on:
@@ -12,12 +81,26 @@
 # # #       CRAFT_TARGET: windows-msvc2022_64-cl
 # # #       CRAFT_MASTER_LOCATION: ${{ github.workspace }}\CraftMaster
 # # #       CRAFT_MASTER_CONFIG: ${{ github.workspace }}\craftmaster.ini
+# # #       # Define where dependencies are stored to cache them
+# # #       CRAFT_ROOT: ${{ github.workspace }}\windows-msvc2022_64-cl
 
 # # #     steps:
 # # #       - name: Checkout Code
 # # #         uses: actions/checkout@v4
 # # #         with:
 # # #           fetch-depth: 0
+
+# # #       # --- CACHE LOGIC ---
+# # #       # This looks for a saved version of the dependencies.
+# # #       # If found, it downloads them in ~2 mins instead of building for 40 mins.
+# # #       - name: Cache Craft Dependencies
+# # #         id: cache-craft
+# # #         uses: actions/cache@v4
+# # #         with:
+# # #           path: ${{ env.CRAFT_ROOT }}
+# # #           key: ${{ runner.os }}-craft-v1-${{ hashFiles('**/craftmaster.ini') }}
+# # #           restore-keys: |
+# # #             ${{ runner.os }}-craft-v1-
 
 # # #       - name: Setup Python
 # # #         uses: actions/setup-python@v5
@@ -28,19 +111,22 @@
 # # #         shell: pwsh
 # # #         run: |
 # # #           choco install inkscape --no-progress -y
-# # #           # Add Inkscape to PATH immediately for the current session
 # # #           echo "C:\Program Files\Inkscape\bin" >> $env:GITHUB_PATH
 
 # # #       - name: Install Build Tools (Craft)
 # # #         shell: pwsh
 # # #         run: |
-# # #           git clone -q --depth=1 https://invent.kde.org/packaging/craftmaster.git ${{ env.CRAFT_MASTER_LOCATION }}
+# # #           # Only clone CraftMaster if it doesn't exist
+# # #           if (!(Test-Path "${{ env.CRAFT_MASTER_LOCATION }}")) {
+# # #             git clone -q --depth=1 https://invent.kde.org/packaging/craftmaster.git ${{ env.CRAFT_MASTER_LOCATION }}
+# # #           }
           
 # # #           function craft() {
 # # #               python "${{ env.CRAFT_MASTER_LOCATION }}\CraftMaster.py" --config "${{ env.CRAFT_MASTER_CONFIG }}" --target ${{ env.CRAFT_TARGET }} -c $args
 # # #               if($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}
 # # #           }
           
+# # #           # These prepare the environment; if cache hit, these skip the hard work
 # # #           craft --add-blueprint-repository "https://github.com/nextcloud/craft-blueprints-kde.git|stable-4.0|"
 # # #           craft --add-blueprint-repository "https://github.com/nextcloud/desktop-client-blueprints.git|stable-4.0|"
 # # #           craft craft
@@ -54,9 +140,10 @@
 # # #               if($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}
 # # #           }
           
-# # #           # Build using your source code
+# # #           # This compiles YOUR specific branded code
 # # #           craft --src-dir ${{ github.workspace }} nextcloud-client
-# # #           # Create the .exe installer
+          
+# # #           # This creates the .exe installer
 # # #           craft --package nextcloud-client
 
 # # #       - name: Upload Branded Installer
@@ -64,8 +151,8 @@
 # # #         with:
 # # #           name: Branded-Nextcloud-Installer
 # # #           path: |
-# # #             ${{ github.workspace }}\${{ env.CRAFT_TARGET }}\tmp\artifacts\*.exe
-# # #             ${{ github.workspace }}\${{ env.CRAFT_TARGET }}\tmp\artifacts\*.msi
+# # #             ${{ env.CRAFT_ROOT }}\tmp\artifacts\*.exe
+# # #             ${{ env.CRAFT_ROOT }}\tmp\artifacts\*.msi
 
 # # name: Build Branded Windows Client
 
@@ -81,7 +168,6 @@
 # #       CRAFT_TARGET: windows-msvc2022_64-cl
 # #       CRAFT_MASTER_LOCATION: ${{ github.workspace }}\CraftMaster
 # #       CRAFT_MASTER_CONFIG: ${{ github.workspace }}\craftmaster.ini
-# #       # Define where dependencies are stored to cache them
 # #       CRAFT_ROOT: ${{ github.workspace }}\windows-msvc2022_64-cl
 
 # #     steps:
@@ -91,8 +177,6 @@
 # #           fetch-depth: 0
 
 # #       # --- CACHE LOGIC ---
-# #       # This looks for a saved version of the dependencies.
-# #       # If found, it downloads them in ~2 mins instead of building for 40 mins.
 # #       - name: Cache Craft Dependencies
 # #         id: cache-craft
 # #         uses: actions/cache@v4
@@ -116,7 +200,6 @@
 # #       - name: Install Build Tools (Craft)
 # #         shell: pwsh
 # #         run: |
-# #           # Only clone CraftMaster if it doesn't exist
 # #           if (!(Test-Path "${{ env.CRAFT_MASTER_LOCATION }}")) {
 # #             git clone -q --depth=1 https://invent.kde.org/packaging/craftmaster.git ${{ env.CRAFT_MASTER_LOCATION }}
 # #           }
@@ -126,11 +209,27 @@
 # #               if($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}
 # #           }
           
-# #           # These prepare the environment; if cache hit, these skip the hard work
 # #           craft --add-blueprint-repository "https://github.com/nextcloud/craft-blueprints-kde.git|stable-4.0|"
 # #           craft --add-blueprint-repository "https://github.com/nextcloud/desktop-client-blueprints.git|stable-4.0|"
 # #           craft craft
 # #           craft --install-deps nextcloud-client
+
+# #       # --- CRITICAL FIX FOR NameError: name 'os' is not defined ---
+# #       - name: Patch Blueprint Bug
+# #         shell: pwsh
+# #         run: |
+# #           $blueprintPath = "${{ env.CRAFT_ROOT }}\etc\blueprints\locations\desktop-client-blueprints\nextcloud-client\nextcloud-client.py"
+# #           if (Test-Path $blueprintPath) {
+# #             $content = Get-Content $blueprintPath
+# #             if ($content -notmatch "import os") {
+# #                 Write-Host "Patching $blueprintPath with 'import os'..."
+# #                 "import os`n" + (Get-Content $blueprintPath -Raw) | Set-Content $blueprintPath
+# #             } else {
+# #                 Write-Host "Blueprint already contains 'import os'."
+# #             }
+# #           } else {
+# #             Write-Error "Blueprint file not found at $blueprintPath"
+# #           }
 
 # #       - name: Compile and Package
 # #         shell: pwsh
@@ -140,10 +239,10 @@
 # #               if($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}
 # #           }
           
-# #           # This compiles YOUR specific branded code
+# #           # Compile branded source
 # #           craft --src-dir ${{ github.workspace }} nextcloud-client
           
-# #           # This creates the .exe installer
+# #           # Create the .exe installer
 # #           craft --package nextcloud-client
 
 # #       - name: Upload Branded Installer
@@ -154,6 +253,7 @@
 # #             ${{ env.CRAFT_ROOT }}\tmp\artifacts\*.exe
 # #             ${{ env.CRAFT_ROOT }}\tmp\artifacts\*.msi
 
+
 # name: Build Branded Windows Client
 
 # on:
@@ -163,6 +263,7 @@
 
 # jobs:
 #   build:
+#     # IMPORTANT: Ensure your repo is PUBLIC to bypass the $0 budget limit
 #     runs-on: windows-2022
 #     env:
 #       CRAFT_TARGET: windows-msvc2022_64-cl
@@ -176,25 +277,26 @@
 #         with:
 #           fetch-depth: 0
 
-#       # --- CACHE LOGIC ---
+#       # --- 1. CACHE LOGIC (Idempotency) ---
 #       - name: Cache Craft Dependencies
 #         id: cache-craft
 #         uses: actions/cache@v4
 #         with:
 #           path: ${{ env.CRAFT_ROOT }}
-#           key: ${{ runner.os }}-craft-v1-${{ hashFiles('**/craftmaster.ini') }}
+#           key: ${{ runner.os }}-craft-v2  # Increment version to reset cache if needed
 #           restore-keys: |
-#             ${{ runner.os }}-craft-v1-
+#             ${{ runner.os }}-craft-
 
 #       - name: Setup Python
 #         uses: actions/setup-python@v5
 #         with:
 #           python-version: '3.12'
 
-#       - name: Install Inkscape (Required for Icons)
+#       # --- 2. TOOLS SETUP ---
+#       - name: Install Inkscape & NSIS
 #         shell: pwsh
 #         run: |
-#           choco install inkscape --no-progress -y
+#           choco install inkscape nsis --no-progress -y
 #           echo "C:\Program Files\Inkscape\bin" >> $env:GITHUB_PATH
 
 #       - name: Install Build Tools (Craft)
@@ -214,23 +316,26 @@
 #           craft craft
 #           craft --install-deps nextcloud-client
 
-#       # --- CRITICAL FIX FOR NameError: name 'os' is not defined ---
-#       - name: Patch Blueprint Bug
+#       # --- 3. PRE-BUILD BUG FIXES ---
+#       - name: Patch Blueprint and Manifest
 #         shell: pwsh
 #         run: |
+#           # Fix 1: Add missing 'import os' to the blueprint
 #           $blueprintPath = "${{ env.CRAFT_ROOT }}\etc\blueprints\locations\desktop-client-blueprints\nextcloud-client\nextcloud-client.py"
 #           if (Test-Path $blueprintPath) {
-#             $content = Get-Content $blueprintPath
+#             $content = Get-Content $blueprintPath -Raw
 #             if ($content -notmatch "import os") {
 #                 Write-Host "Patching $blueprintPath with 'import os'..."
-#                 "import os`n" + (Get-Content $blueprintPath -Raw) | Set-Content $blueprintPath
-#             } else {
-#                 Write-Host "Blueprint already contains 'import os'."
+#                 "import os`r`n" + $content | Set-Content $blueprintPath
 #             }
-#           } else {
-#             Write-Error "Blueprint file not found at $blueprintPath"
 #           }
 
+#           # Fix 2: Ensure the VisualElementsManifest exists to prevent 30-min crash
+#           if (!(Test-Path "theme")) { mkdir theme }
+#           $manifest = '<Application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><VisualElements ShowNameOnSquare150x150Logo="on" Square150x150Logo="visualelements\150-Droptocloud-icon.png" Square70x70Logo="visualelements\70-Droptocloud-icon.png" ForegroundText="light" BackgroundColor="#0082c9"/></Application>'
+#           $manifest | Out-File -FilePath "theme/Droptocloud.VisualElementsManifest.xml" -Encoding utf8
+
+#       # --- 4. COMPILE & PACKAGE ---
 #       - name: Compile and Package
 #         shell: pwsh
 #         run: |
@@ -239,16 +344,17 @@
 #               if($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}
 #           }
           
-#           # Compile branded source
+#           # Compile using your source code (Branding)
 #           craft --src-dir ${{ github.workspace }} nextcloud-client
           
-#           # Create the .exe installer
+#           # Generate the final .exe
 #           craft --package nextcloud-client
 
+#       # --- 5. EXPORT THE INSTALLER ---
 #       - name: Upload Branded Installer
 #         uses: actions/upload-artifact@v4
 #         with:
-#           name: Branded-Nextcloud-Installer
+#           name: Droptocloud-Windows-Installer
 #           path: |
 #             ${{ env.CRAFT_ROOT }}\tmp\artifacts\*.exe
 #             ${{ env.CRAFT_ROOT }}\tmp\artifacts\*.msi
@@ -283,7 +389,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ env.CRAFT_ROOT }}
-          key: ${{ runner.os }}-craft-v2  # Increment version to reset cache if needed
+          key: ${{ runner.os }}-craft-v2
           restore-keys: |
             ${{ runner.os }}-craft-
 
@@ -305,12 +411,12 @@ jobs:
           if (!(Test-Path "${{ env.CRAFT_MASTER_LOCATION }}")) {
             git clone -q --depth=1 https://invent.kde.org/packaging/craftmaster.git ${{ env.CRAFT_MASTER_LOCATION }}
           }
-          
+
           function craft() {
               python "${{ env.CRAFT_MASTER_LOCATION }}\CraftMaster.py" --config "${{ env.CRAFT_MASTER_CONFIG }}" --target ${{ env.CRAFT_TARGET }} -c $args
-              if($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}
+              if($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
-          
+
           craft --add-blueprint-repository "https://github.com/nextcloud/craft-blueprints-kde.git|stable-4.0|"
           craft --add-blueprint-repository "https://github.com/nextcloud/desktop-client-blueprints.git|stable-4.0|"
           craft craft
@@ -320,19 +426,16 @@ jobs:
       - name: Patch Blueprint and Manifest
         shell: pwsh
         run: |
-          # Fix 1: Add missing 'import os' to the blueprint
           $blueprintPath = "${{ env.CRAFT_ROOT }}\etc\blueprints\locations\desktop-client-blueprints\nextcloud-client\nextcloud-client.py"
           if (Test-Path $blueprintPath) {
             $content = Get-Content $blueprintPath -Raw
             if ($content -notmatch "import os") {
-                Write-Host "Patching $blueprintPath with 'import os'..."
-                "import os`r`n" + $content | Set-Content $blueprintPath
+              "import os`r`n$content" | Set-Content $blueprintPath
             }
           }
 
-          # Fix 2: Ensure the VisualElementsManifest exists to prevent 30-min crash
           if (!(Test-Path "theme")) { mkdir theme }
-          $manifest = '<Application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><VisualElements ShowNameOnSquare150x150Logo="on" Square150x150Logo="visualelements\150-Droptocloud-icon.png" Square70x70Logo="visualelements\70-Droptocloud-icon.png" ForegroundText="light" BackgroundColor="#0082c9"/></Application>'
+          $manifest = '<Application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><VisualElements ShowNameOnSquare150x150Logo="on" Square150x150Logo="visualelements\150-nextcloud-icon.png" Square70x70Logo="visualelements\70-nextcloud-icon.png" ForegroundText="light" BackgroundColor="#0082c9"/></Application>'
           $manifest | Out-File -FilePath "theme/Droptocloud.VisualElementsManifest.xml" -Encoding utf8
 
       # --- 4. COMPILE & PACKAGE ---
@@ -341,20 +444,18 @@ jobs:
         run: |
           function craft() {
               python "${{ env.CRAFT_MASTER_LOCATION }}\CraftMaster.py" --config "${{ env.CRAFT_MASTER_CONFIG }}" --target ${{ env.CRAFT_TARGET }} -c $args
-              if($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}
+              if($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
-          
-          # Compile using your source code (Branding)
+
           craft --src-dir ${{ github.workspace }} nextcloud-client
-          
-          # Generate the final .exe
           craft --package nextcloud-client
 
-      # --- 5. EXPORT THE INSTALLER ---
+      # --- 5. EXPORT THE INSTALLER (FIXED PATH ONLY) ---
       - name: Upload Branded Installer
         uses: actions/upload-artifact@v4
         with:
           name: Droptocloud-Windows-Installer
           path: |
-            ${{ env.CRAFT_ROOT }}\tmp\artifacts\*.exe
-            ${{ env.CRAFT_ROOT }}\tmp\artifacts\*.msi
+            ${{ env.CRAFT_ROOT }}\tmp\*.exe
+            ${{ env.CRAFT_ROOT }}\tmp\*.msi
+
