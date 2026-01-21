@@ -104,7 +104,7 @@ jobs:
       # 7. UPLOAD MSI
       # -------------------------------------------------
       - name: Upload MSI
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: nextcloud-windows-msi
           path: ${{ env.CRAFT_ROOT }}\tmp\*.msi
@@ -212,7 +212,7 @@ jobs:
 #       # 7. UPLOAD MSI
 #       # -------------------------------------------------
 #       - name: Upload MSI
-#         uses: actions/upload-artifact@v4
+#         uses: actions/upload-artifact@v6
 #         with:
 #           name: nextcloud-windows-msi
 #           path: ${{ env.CRAFT_ROOT }}\tmp\*.msi
@@ -321,7 +321,7 @@ jobs:
 # #       # 7. UPLOAD MSI
 # #       # -------------------------------------------------
 # #       - name: Upload MSI
-# #         uses: actions/upload-artifact@v4
+# #         uses: actions/upload-artifact@v6
 # #         with:
 # #           name: Droptocloud-Windows-MSI
 # #           path: ${{ env.CRAFT_ROOT }}\tmp\*.msi
@@ -448,7 +448,7 @@ jobs:
 
 # # #       # 8. UPLOAD MSI
 # # #       - name: Upload MSI
-# # #         uses: actions/upload-artifact@v4
+# # #         uses: actions/upload-artifact@v6
 # # #         with:
 # # #           name: Droptocloud-Windows-MSI
 # # #           path: ${{ env.CRAFT_ROOT }}\tmp\*.msi
@@ -516,7 +516,7 @@ jobs:
 # # # # # # # # # #           craft --package nextcloud-client
 
 # # # # # # # # # #       - name: Upload Branded Installer
-# # # # # # # # # #         uses: actions/upload-artifact@v4
+# # # # # # # # # #         uses: actions/upload-artifact@v6
 # # # # # # # # # #         with:
 # # # # # # # # # #           name: Branded-Nextcloud-Installer
 # # # # # # # # # #           path: |
@@ -603,7 +603,7 @@ jobs:
 # # # # # # # # #           craft --package nextcloud-client
 
 # # # # # # # # #       - name: Upload Branded Installer
-# # # # # # # # #         uses: actions/upload-artifact@v4
+# # # # # # # # #         uses: actions/upload-artifact@v6
 # # # # # # # # #         with:
 # # # # # # # # #           name: Branded-Nextcloud-Installer
 # # # # # # # # #           path: |
@@ -702,7 +702,7 @@ jobs:
 # # # # # # # #           craft --package nextcloud-client
 
 # # # # # # # #       - name: Upload Branded Installer
-# # # # # # # #         uses: actions/upload-artifact@v4
+# # # # # # # #         uses: actions/upload-artifact@v6
 # # # # # # # #         with:
 # # # # # # # #           name: Branded-Nextcloud-Installer
 # # # # # # # #           path: |
@@ -808,7 +808,7 @@ jobs:
 
 # # # # # # #       # --- 5. EXPORT THE INSTALLER ---
 # # # # # # #       - name: Upload Branded Installer
-# # # # # # #         uses: actions/upload-artifact@v4
+# # # # # # #         uses: actions/upload-artifact@v6
 # # # # # # #         with:
 # # # # # # #           name: Droptocloud-Windows-Installer
 # # # # # # #           path: |
@@ -908,7 +908,7 @@ jobs:
 
 # # # # # #       # --- 5. EXPORT THE INSTALLER (FIXED PATH ONLY) ---
 # # # # # #       - name: Upload Branded Installer
-# # # # # #         uses: actions/upload-artifact@v4
+# # # # # #         uses: actions/upload-artifact@v6
 # # # # # #         with:
 # # # # # #           name: Droptocloud-Windows-Installer
 # # # # # #           path: |
@@ -1045,7 +1045,7 @@ jobs:
 # # # # #       # 8. UPLOAD MSI ONLY
 # # # # #       # -------------------------------------------------
 # # # # #       - name: Upload MSI
-# # # # #         uses: actions/upload-artifact@v4
+# # # # #         uses: actions/upload-artifact@v6
 # # # # #         with:
 # # # # #           name: Droptocloud-Windows-MSI
 # # # # #           path: |
@@ -1183,7 +1183,7 @@ jobs:
 # # # #       # 8. UPLOAD MSI
 # # # #       # -------------------------------------------------
 # # # #       - name: Upload MSI
-# # # #         uses: actions/upload-artifact@v4
+# # # #         uses: actions/upload-artifact@v6
 # # # #         with:
 # # # #           name: Droptocloud-Windows-MSI
 # # # #           path: |
