@@ -27,7 +27,7 @@ jobs:
       # 2. SETUP PYTHON (HOSTED)
       # -------------------------------------------------
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
@@ -138,7 +138,7 @@ jobs:
 #       # 2. SETUP PYTHON
 #       # -------------------------------------------------
 #       - name: Setup Python
-#         uses: actions/setup-python@v5
+#         uses: actions/setup-python@v6
 #         with:
 #           python-version: '3.12'
 
@@ -257,7 +257,7 @@ jobs:
 # #       # 3. SETUP PYTHON
 # #       # -------------------------------------------------
 # #       - name: Setup Python
-# #         uses: actions/setup-python@v5
+# #         uses: actions/setup-python@v6
 # #         with:
 # #           python-version: '3.12'
 
@@ -361,7 +361,7 @@ jobs:
 
 # # #       # 3. SETUP PYTHON
 # # #       - name: Setup Python
-# # #         uses: actions/setup-python@v5
+# # #         uses: actions/setup-python@v6
 # # #         with:
 # # #           python-version: '3.12'
 
@@ -476,7 +476,7 @@ jobs:
 # # # # # # # # # #           fetch-depth: 0
 
 # # # # # # # # # #       - name: Setup Python
-# # # # # # # # # #         uses: actions/setup-python@v5
+# # # # # # # # # #         uses: actions/setup-python@v6
 # # # # # # # # # #         with:
 # # # # # # # # # #           python-version: '3.12'
 
@@ -559,7 +559,7 @@ jobs:
 # # # # # # # # #             ${{ runner.os }}-craft-v1-
 
 # # # # # # # # #       - name: Setup Python
-# # # # # # # # #         uses: actions/setup-python@v5
+# # # # # # # # #         uses: actions/setup-python@v6
 # # # # # # # # #         with:
 # # # # # # # # #           python-version: '3.12'
 
@@ -643,7 +643,7 @@ jobs:
 # # # # # # # #             ${{ runner.os }}-craft-v1-
 
 # # # # # # # #       - name: Setup Python
-# # # # # # # #         uses: actions/setup-python@v5
+# # # # # # # #         uses: actions/setup-python@v6
 # # # # # # # #         with:
 # # # # # # # #           python-version: '3.12'
 
@@ -744,7 +744,7 @@ jobs:
 # # # # # # #             ${{ runner.os }}-craft-
 
 # # # # # # #       - name: Setup Python
-# # # # # # #         uses: actions/setup-python@v5
+# # # # # # #         uses: actions/setup-python@v6
 # # # # # # #         with:
 # # # # # # #           python-version: '3.12'
 
@@ -850,7 +850,7 @@ jobs:
 # # # # # #             ${{ runner.os }}-craft-
 
 # # # # # #       - name: Setup Python
-# # # # # #         uses: actions/setup-python@v5
+# # # # # #         uses: actions/setup-python@v6
 # # # # # #         with:
 # # # # # #           python-version: '3.12'
 
@@ -957,7 +957,7 @@ jobs:
 # # # # #       # 3. PYTHON
 # # # # #       # -------------------------------------------------
 # # # # #       - name: Setup Python
-# # # # #         uses: actions/setup-python@v5
+# # # # #         uses: actions/setup-python@v6
 # # # # #         with:
 # # # # #           python-version: '3.12'
 
@@ -1092,7 +1092,7 @@ jobs:
 # # # #       # 3. PYTHON
 # # # #       # -------------------------------------------------
 # # # #       - name: Setup Python
-# # # #         uses: actions/setup-python@v5
+# # # #         uses: actions/setup-python@v6
 # # # #         with:
 # # # #           python-version: '3.12'
 

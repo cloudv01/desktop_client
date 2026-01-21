@@ -49,7 +49,7 @@ jobs:
 
       - name: Set up Python ${{ env.PYTHON_VERSION }}
         if: steps.cache-craft-restore.outputs.cache-hit != 'true'
-        uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        uses: actions/setup-python@bfe8cc55a7890e3d6672eda6460ef37bfcc70755 # v6.1.0
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
