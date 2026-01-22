@@ -1,72 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   id="Layer_1"
-   x="0px"
-   y="0px"
-   viewBox="0 0 462.18754 54.374996"
-   enable-background="new 0 0 196.6 72"
-   xml:space="preserve"
-   inkscape:version="1.0 (4035a4f, 2020-05-01)"
-   sodipodi:docname="banner.svg"
-   width="493"
-   height="58"
-   inkscape:export-filename="/Users/misch/nextcloud/_icon/_msi/banner.png"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96"><metadata
-     id="metadata20"><rdf:RDF><cc:Work
-         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
-     id="defs18"><clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath8812"><circle
-         id="circle8814"
-         cx="95.669289"
-         cy="95.669296"
-         r="79.724197"
-         style="fill:#00080d;fill-opacity:1;stroke-width:1" /></clipPath></defs><sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="1"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1440"
-     inkscape:window-height="812"
-     id="namedview16"
-     showgrid="false"
-     inkscape:zoom="1.3964178"
-     inkscape:cx="264.97589"
-     inkscape:cy="100.72146"
-     inkscape:current-layer="Layer_1"
-     fit-margin-top="10"
-     fit-margin-left="10"
-     fit-margin-right="10"
-     fit-margin-bottom="10"
-     inkscape:window-x="0"
-     inkscape:window-y="23"
-     inkscape:window-maximized="1"
-     units="px"
-     inkscape:snap-bbox="true"
-     inkscape:bbox-paths="true"
-     inkscape:bbox-nodes="true"
-     inkscape:snap-bbox-edge-midpoints="true"
-     inkscape:snap-bbox-midpoints="true"
-     inkscape:snap-page="true"
-     inkscape:document-rotation="0" /><path
-     inkscape:connector-curvature="0"
-     id="path1052"
-     d="m 411.83858,10.876373 c -7.55537,0 -13.95917,5.122046 -15.94393,12.061838 -1.72495,-3.680971 -5.463,-6.259801 -9.76856,-6.259801 -5.92119,0 -10.78856,4.867369 -10.78856,10.78855 0,5.921172 4.86737,10.790763 10.78856,10.790763 4.30556,0 8.04361,-2.580407 9.76856,-6.262024 1.98476,6.94032 8.38856,12.064068 15.94393,12.064068 7.49951,0 13.87065,-5.046471 15.90617,-11.908511 1.75682,3.598038 5.4486,6.106467 9.69302,6.106467 5.92118,0 10.79076,-4.869591 10.79076,-10.790763 0,-5.921181 -4.86958,-10.78855 -10.79076,-10.78855 -4.24442,0 -7.9362,2.506858 -9.69302,6.10425 -2.03552,-6.861503 -8.40666,-11.906287 -15.90617,-11.906287 z m 0,6.333131 c 5.70346,0 10.25968,4.554019 10.25968,10.257456 0,5.703427 -4.55622,10.259672 -10.25968,10.259672 -5.70341,0 -10.25743,-4.556245 -10.25743,-10.259672 0,-5.703437 4.55402,-10.257454 10.25743,-10.257456 z m -25.71249,5.802039 c 2.4988,0 4.45763,1.9566 4.45763,4.455417 0,2.498807 -1.95883,4.457631 -4.45763,4.457631 -2.49882,0 -4.45544,-1.958824 -4.45544,-4.457631 0,-2.498817 1.95662,-4.455417 4.45544,-4.455417 z m 51.31168,0 c 2.49883,0 4.45764,1.9566 4.45764,4.455417 0,2.498807 -1.95883,4.457631 -4.45764,4.457631 -2.49879,0 -4.45541,-1.958824 -4.45541,-4.457631 0,-2.498817 1.95662,-4.455417 4.45541,-4.455417 z"
-     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#0082c9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.56218;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-     inkscape:export-filename="Nextcloud Hub logo variants.png"
-     inkscape:export-xdpi="300"
-     inkscape:export-ydpi="300" /></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="92" viewBox="0 0 730 92" fill="none">
+<path d="M 583,54 582,55 581,55 581,56 580,57 580,62 582,64 583,64 584,65 586,65 587,64 588,64 590,62 590,56 588,54 Z" fill="black"/>
+<path d="M 567,54 564,57 564,61 566,63 566,64 567,64 568,65 571,65 572,64 573,64 574,63 574,62 575,61 575,58 574,57 574,56 572,54 Z" fill="black"/>
+<path d="M 552,54 551,55 550,55 549,56 549,57 548,58 548,60 549,61 549,62 551,64 552,64 553,65 555,65 556,64 557,64 559,62 559,60 560,59 559,58 559,57 558,56 558,55 557,55 556,54 Z" fill="black"/>
+<path d="M 638,34 638,47 640,49 641,49 642,50 649,50 653,46 653,34 648,34 648,42 647,43 647,44 645,46 643,44 643,34 Z" fill="black"/>
+<path d="M 625,33 624,34 623,34 622,35 621,35 618,38 618,46 621,49 622,49 623,50 630,50 631,49 632,49 634,47 634,46 635,45 635,39 634,38 634,37 632,35 631,35 630,34 629,34 628,33 Z" fill="black"/>
+<path d="M 571,33 570,34 569,34 568,35 567,35 565,37 565,38 564,39 564,45 566,47 566,48 567,49 568,49 569,50 576,50 577,49 578,49 581,46 581,45 582,44 582,40 581,39 581,38 580,37 580,36 579,35 578,35 577,34 575,34 574,33 Z" fill="black"/>
+<path d="M 537,33 536,34 529,34 528,35 528,58 529,59 534,59 534,50 535,49 536,50 541,50 542,49 543,49 544,48 544,47 546,45 546,39 545,38 545,37 542,34 540,34 539,33 Z" fill="black"/>
+<path d="M 505,33 503,35 502,34 496,34 496,49 497,50 501,50 502,49 502,41 505,38 507,38 508,39 508,44 509,45 509,46 510,47 510,48 511,48 513,50 520,50 521,49 522,49 525,46 525,38 523,36 523,35 522,35 521,34 519,34 518,33 515,33 514,34 513,34 512,35 511,35 509,37 508,36 508,34 507,33 Z" fill="black"/>
+<path d="M 546,26 546,30 547,31 551,31 552,32 552,49 553,50 557,50 558,49 558,32 559,31 563,31 563,26 Z" fill="black"/>
+<path d="M 596,25 595,26 592,26 591,27 589,27 586,30 586,31 585,32 585,33 584,34 584,37 583,38 584,39 584,42 585,43 585,44 586,45 586,46 587,46 588,47 588,48 589,48 590,49 591,49 592,50 600,50 601,49 602,49 607,44 606,43 605,43 603,41 602,41 599,44 598,44 597,45 595,45 594,44 592,44 590,42 590,41 589,40 589,36 590,35 590,34 592,32 593,32 594,31 598,31 599,32 600,32 602,34 604,34 605,33 606,33 607,32 606,31 606,30 604,28 603,28 602,27 601,27 600,26 597,26 Z" fill="black"/>
+<path d="M 668,22 668,34 667,35 666,34 665,34 664,33 662,33 661,34 660,34 659,35 658,35 656,37 656,39 655,40 655,43 656,44 656,46 657,47 657,48 658,48 660,50 666,50 667,49 668,50 672,50 673,49 673,23 672,22 Z" fill="black"/>
+<path d="M 610,22 610,23 609,24 609,49 610,50 614,50 615,49 615,23 614,22 Z" fill="black"/>
+<path d="M 462,21 462,37 463,37 466,34 466,27 468,25 476,25 477,26 480,26 481,27 482,27 486,31 486,32 487,33 487,35 488,36 488,39 487,40 487,42 485,44 485,45 483,47 482,47 481,48 480,48 479,49 467,49 466,48 466,42 471,37 472,37 475,34 478,34 479,35 479,39 477,41 476,40 476,38 474,38 474,39 473,40 472,40 471,41 471,45 479,45 480,44 481,44 482,43 482,42 484,40 484,35 483,34 483,33 480,30 478,30 477,29 471,29 471,36 470,37 466,37 462,41 462,53 463,54 478,54 479,53 482,53 484,51 485,51 490,46 490,45 491,44 491,42 492,41 492,34 491,33 491,31 490,30 490,29 489,28 489,27 488,27 484,23 483,23 482,22 480,22 479,21 Z" fill="black"/>
+</svg>
