@@ -73,7 +73,7 @@ jobs:
         if: steps.cache-craft-restore.outputs.cache-hit != 'true'
         run: |
           python "${{ env.CRAFT_MASTER_LOCATION }}/CraftMaster.py" --config "${{ env.CRAFT_MASTER_CONFIG }}" --target ${{ env.CRAFT_TARGET }} -c --add-blueprint-repository "https://github.com/nextcloud/craft-blueprints-kde.git|next|"
-          python "${{ env.CRAFT_MASTER_LOCATION }}/CraftMaster.py" --config "${{ env.CRAFT_MASTER_CONFIG }}" --target ${{ env.CRAFT_TARGET }} -c --add-blueprint-repository "https://github.com/aartiksaini/cloudv0-blueprint.git|next|"
+          python "${{ env.CRAFT_MASTER_LOCATION }}/CraftMaster.py" --config "${{ env.CRAFT_MASTER_CONFIG }}" --target ${{ env.CRAFT_TARGET }} -c --add-blueprint-repository "https://github.com/aartiksaini/cloudv0-blueprint.git|master|"
 
       - name: Setup Craft
         if: steps.cache-craft-restore.outputs.cache-hit != 'true'
